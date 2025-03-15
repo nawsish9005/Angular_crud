@@ -13,6 +13,13 @@ export class CreatePostComponent {
     content: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, Validators.maxLength(3000)]}), 
   });
 
+  get title(){
+    return this.createPostForm.controls.title;
+  }
+
+  get content(){
+    return this.createPostForm.controls.content;
+  }
   onFormSubmit(){
     console.log(this.createPostForm.value);
   }
