@@ -27,10 +27,24 @@
         <label for="content" class="w-full">Content</label>
         <textarea class="bg-neutral-100 w-full px-4 py-2 mt-2 h-[200px]"
         placeholder="Post Content" formControlName="content"></textarea>
+        @if(content.invalid && (content.dirty || content.touched))
+        {
+            @if(content.hasError('required'))
+            {
+                <p class="text-red-700">Content is required.</p>
+            }
+            @if(content.hasError('maxlength'))
+            {
+                <p class="text-red-700">Content must not exceed 3000 characters.</p>
+            }
+        }
     </div>
 
     <div class="mt-4">
-        <button type="submit" class="px-4 py-2 rounded bg-indigo-500 text-white">
+        <button type="submit" 
+        class="px-4 py-2 rounded bg-indigo-500 text-white disabled:opacity-50
+        disabled: cursor-not-allowed"
+        [disabled]="createPostForm.valid===false">
             Publish
         </button>
     </div>
